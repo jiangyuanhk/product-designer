@@ -67,5 +67,23 @@ $(document).ready(function(){
     canvasWrapper.add(rect);
   });
 
+
+  $("#text-italic-btn").click(function() {     
+    var activeObject = canvas.getActiveObject();
+    if (activeObject && activeObject.type === 'i-text') {
+      activeObject.fontStyle = (activeObject.fontStyle == 'italic' ? '' : 'italic');        
+      canvas.renderAll();
+    }
+  });
+
+  $("#text-bold-btn").click(function() {     
+    var activeObject = canvas.getActiveObject();
+    if (activeObject && activeObject.type === 'i-text') {
+      activeObject.fontStyle = (activeObject.fontStyle == 'bold' ? '' : 'bold');        
+      canvas.renderAll();
+    }
+  });
+  
+
 });//doc ready
 

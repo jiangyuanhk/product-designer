@@ -64,7 +64,7 @@ $(document).ready(function(){
       width: 20,
       height: 20
     });
-    canvasWrapper.add(rect);
+    canvas.add(rect);
   });
 
   document.getElementById('imageLoader').addEventListener('change', handleImage, false);
@@ -102,6 +102,10 @@ $(document).ready(function(){
         });
       });
     });
+  });
+
+  $("#download").click(function() {
+      window.open(canvas.toDataURL('png'));
   });
 });//doc ready
 

@@ -26,8 +26,8 @@ $(document).ready(function(){
       backgroundColor: '',
       fill: '#000000',
       fontSize: 16,
-      lockScalingX: true,
-      lockScalingY: true,
+      lockScalingX: false,
+      lockScalingY: false,
       hasRotatingPoint: true,
       transparentCorners: true,
       cornerSize: 7

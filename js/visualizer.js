@@ -87,7 +87,6 @@ $(document).ready(function(){
     }
   });
 
-
   $("#filter-btn").click(function() {
     var hiddenImg = document.createElement('img');
     hiddenImg.src = canvas.getActiveObject().toDataURL();

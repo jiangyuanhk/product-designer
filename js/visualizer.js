@@ -86,8 +86,24 @@ $(document).ready(function(){
       canvas.renderAll();
     }
   });
-  
 
+
+  $("#filter-btn").click(function() {
+    var hiddenImg = document.createElement('img');
+    hiddenImg.src = canvas.getActiveObject().toDataURL();
+    hiddenImg.id = 'target';
+    hiddenImg.style.display = 'none';
+    document.body.appendChild(hiddenImg);
+    Caman('#target', function(value) {
+      this.brightness(10);
+      this.contrast(20);
+      this.render(function() {
+        canvas.getActiveObject().setSrc(document.getElementById('target').toDataURL(), function() {
+          canvas.renderAll();
+        });
+      });
+    });
+  });
 });//doc ready
 
 

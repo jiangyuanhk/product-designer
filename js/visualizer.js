@@ -48,8 +48,8 @@ $(document).ready(function(){
 
   $('#sticker-btn').click(function() {
     fabric.Image.fromURL('img/f.jpg',function(oImg){
-    oImg.scale(0.2).setFlipX(true);//tmñ
-    oImg.left=230;//posicion de imagen
+    oImg.scale(0.2).setFlipX(false);
+    oImg.left=230;
     oImg.top=230;
     canvas.add(oImg);
     });
@@ -66,6 +66,9 @@ $(document).ready(function(){
     });
     canvasWrapper.add(rect);
   });
+
+  document.getElementById('imageLoader').addEventListener('change', handleImage, false);
+
 
 
   $("#text-italic-btn").click(function() {     
@@ -86,4 +89,29 @@ $(document).ready(function(){
   
 
 });//doc ready
+
+
+function handleImage(e){
+  var reader = new FileReader();
+    reader.onload = function (event){
+      var imgObj = new Image();
+      imgObj.src = event.target.result;
+      imgObj.onload = function () {
+        var image = new fabric.Image(imgObj);
+        image.set({
+              angle: 0,
+              padding: 10,
+              cornersize:10,
+              height:110,
+              width:110,
+        });
+        canvas.centerObject(image);
+        canvas.add(image);
+        canvas.renderAll();
+      }
+    }
+    reader.readAsDataURL(e.target.files[0]);
+}
+
+
 

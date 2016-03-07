@@ -88,16 +88,7 @@ $(document).ready(function(){
   });
 
   $("#filter-btn").click(function() {
-    //adding noise effect
-    applyFilter(6, new f.Noise({
-      noise: 200
-    }));
-    //adding blur
-    applyFilter(9, new f.Convolute({
-      matrix: [ 1/9, 1/9, 1/9,
-                1/9, 1/9, 1/9,
-                1/9, 1/9, 1/9 ]
-    }));
+    addImageEffect();
   });
 
   $("#download").click(function() {
@@ -117,17 +108,32 @@ function handleImage(e){
               angle: 0,
               padding: 10,
               cornersize:10,
-              height:110,
-              width:110,
+              height:220,
+              width:220,
         });
         canvas.centerObject(image);
         canvas.add(image);
+        canvas.setActiveObject(image);
         canvas.renderAll();
+        addImageEffect();
+
       }
     }
     reader.readAsDataURL(e.target.files[0]);
 }
 
+function addImageEffect() {
+   //adding noise effect
+    applyFilter(6, new f.Noise({
+      noise: 200
+    }));
+    //adding blur
+    applyFilter(9, new f.Convolute({
+      matrix: [ 1/9, 1/9, 1/9,
+                1/9, 1/9, 1/9,
+                1/9, 1/9, 1/9 ]
+    }));
+}
 
 function applyFilter(index, filter) {
   var obj = canvas.getActiveObject();

@@ -88,7 +88,16 @@ $(document).ready(function(){
   });
 
   $("#filter-btn").click(function() {
-    applyFilter(0, new f.Grayscale());
+    //adding noise effect
+    applyFilter(6, new f.Noise({
+      noise: 200
+    }));
+    //adding blur
+    applyFilter(9, new f.Convolute({
+      matrix: [ 1/9, 1/9, 1/9,
+                1/9, 1/9, 1/9,
+                1/9, 1/9, 1/9 ]
+    }));
   });
 
   $("#download").click(function() {
@@ -122,8 +131,10 @@ function handleImage(e){
 
 function applyFilter(index, filter) {
   var obj = canvas.getActiveObject();
-  obj.filters[index] = filter;
-  obj.applyFilters(canvas.renderAll.bind(canvas));
+  if (obj) {
+    obj.filters[index] = filter;
+    obj.applyFilters(canvas.renderAll.bind(canvas));
+  }
 }
 
 

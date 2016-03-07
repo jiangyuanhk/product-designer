@@ -1,7 +1,7 @@
 
 var canvas = new fabric.Canvas('canvas');
 var ctx = canvas.getContext("2d");
-
+f = fabric.Image.filters;
 backgroundImg = "img/tshirt.png";
 
 
@@ -88,20 +88,7 @@ $(document).ready(function(){
   });
 
   $("#filter-btn").click(function() {
-    var hiddenImg = document.createElement('img');
-    hiddenImg.src = canvas.getActiveObject().toDataURL();
-    hiddenImg.id = 'target';
-    hiddenImg.style.display = 'none';
-    document.body.appendChild(hiddenImg);
-    Caman('#target', function(value) {
-      this.brightness(10);
-      this.contrast(20);
-      this.render(function() {
-        canvas.getActiveObject().setSrc(document.getElementById('target').toDataURL(), function() {
-          canvas.renderAll();
-        });
-      });
-    });
+    applyFilter(0, new f.Grayscale());
   });
 
   $("#download").click(function() {
@@ -132,5 +119,11 @@ function handleImage(e){
     reader.readAsDataURL(e.target.files[0]);
 }
 
+
+function applyFilter(index, filter) {
+  var obj = canvas.getActiveObject();
+  obj.filters[index] = filter;
+  obj.applyFilters(canvas.renderAll.bind(canvas));
+}
 
 
